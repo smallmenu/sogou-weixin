@@ -23,10 +23,11 @@ public class SogouWeixinApplication {
     @Autowired
     public SogouWeixinApplication(SogouProperties sogou) {
         logger.info("Clear Temp File...");
-        logger.info(sogou.toString());
+
         File cookieSeccode = new File(sogou.getCookieSeccodeFile());
         File seccode = new File(sogou.getSeccodeFile());
         File suv = new File(sogou.getSuvFile());
+
         if (cookieSeccode.exists()) {
             cookieSeccode.delete();
         }

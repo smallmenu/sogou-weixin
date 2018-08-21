@@ -22,6 +22,8 @@ public class SogouProperties {
 
     private String suvFile;
 
+    private String userAgent;
+
     public String getSeccodeUrl() {
         return seccodeUrl;
     }
@@ -78,6 +80,14 @@ public class SogouProperties {
         this.suvFile = suvFile;
     }
 
+    public String getUserAgent() {
+        return userAgent;
+    }
+
+    public void setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+    }
+
     @Override
     public String toString() {
         return "SogouProperties{" +
@@ -88,6 +98,7 @@ public class SogouProperties {
                 ", cookieSeccodeFile='" + cookieSeccodeFile + '\'' +
                 ", seccodeFile='" + seccodeFile + '\'' +
                 ", suvFile='" + suvFile + '\'' +
+                ", userAgent='" + userAgent + '\'' +
                 '}';
     }
 }

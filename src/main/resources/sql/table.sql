@@ -5,6 +5,5 @@ CREATE TABLE `snuid` (
 	PRIMARY KEY (`id`),
 	INDEX `created` (`created`)
 )
-COMMENT='39B745681A1F68924BEFF7F21B62E236'
 COLLATE='utf8mb4_general_ci'
 ENGINE=InnoDB;

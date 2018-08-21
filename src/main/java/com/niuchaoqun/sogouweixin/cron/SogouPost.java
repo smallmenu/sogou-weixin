@@ -21,6 +21,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 根据模拟提交的验证码Cookie，循环生成 SNUID
+ */
 @Component
 public class SogouPost {
     private static final Logger logger = LoggerFactory.getLogger(SogouPost.class);
@@ -33,6 +36,8 @@ public class SogouPost {
 
     @Scheduled(fixedRate = 2000)
     public void generatorSnuid() throws IOException {
+        memory();
+
         File seccodeFile = new File(sogou.getSeccodeFile());
         File cookieSeccodeFile = new File(sogou.getCookieSeccodeFile());
 
@@ -57,6 +62,7 @@ public class SogouPost {
             Response response = seccodeClient.newCall(
                     new Request.Builder()
                             .url(sogou.getSeccodePostUrl())
+                            .header("User-Agent", sogou.getUserAgent())
                             .post(posts)
                             .build()
             ).execute();
@@ -86,5 +92,15 @@ public class SogouPost {
         } else {
             logger.info("Missing Seccode File...");
         }
+    }
+
+    private void memory() {
+        Runtime runtime = Runtime.getRuntime();
+
+        long free = runtime.freeMemory() / 1024 / 1024;
+        long total = runtime.totalMemory() / 1024 / 1024;
+        long max = runtime.maxMemory() / 1024 / 1024;
+
+        logger.info("Memory: " +free + "M/" + total + "M/" + max + "M");
     }
 }

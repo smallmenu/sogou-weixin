@@ -24,6 +24,10 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * 搜狗微信验证码模拟提交
+ *
+ */
 @Controller
 @RequestMapping("/sogou")
 public class SogouController extends BaseController {
@@ -66,6 +70,7 @@ public class SogouController extends BaseController {
         Response response = seccodeClient.newCall(
                 new Request.Builder()
                         .url(sogou.getSeccodePostUrl())
+                        .header("User-Agent", sogou.getUserAgent())
                         .post(posts)
                         .build()
         ).execute();
@@ -110,7 +115,10 @@ public class SogouController extends BaseController {
                 .cookieJar(cookiePv)
                 .build();
         response = pvClient.newCall(
-                new Request.Builder().url(pv_url).build()
+                new Request.Builder()
+                        .url(pv_url)
+                        .header("User-Agent", sogou.getUserAgent())
+                        .build()
         ).execute();
         cookies = cookiePv.getCookies();
         logger.info(cookies.toString());
@@ -130,7 +138,10 @@ public class SogouController extends BaseController {
                     .cookieJar(cookieSeccode)
                     .build();
             response = seccodeClient.newCall(
-                    new Request.Builder().url(seccode_url).build()
+                    new Request.Builder()
+                            .url(seccode_url)
+                            .header("User-Agent", sogou.getUserAgent())
+                            .build()
             ).execute();
 
             if (response.isSuccessful() && response.body() != null) {
