@@ -7,7 +7,7 @@ include('function.php');
 
 $url = 'http://weixin.sogou.com/weixin?type=1&s_from=input&query=%E4%B8%AD%E5%9B%BD&ie=utf8&_sug_=n&_sug_type_=';
 
-$snuidUrl = 'http://localhost:9999/take';
+$snuidUrl = 'http://192.168.101.192:9999/take';
 
 for ($i = 0; $i < 50; $i++) {
 

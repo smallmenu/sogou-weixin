@@ -34,7 +34,7 @@ public class SogouPost {
     @Autowired
     private SnuidRepository snuidRepository;
 
-    @Scheduled(fixedRate = 2000)
+    @Scheduled(fixedDelay = 200)
     public void generatorSnuid() throws IOException {
         memory();
 
