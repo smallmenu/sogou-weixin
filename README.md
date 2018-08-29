@@ -11,7 +11,7 @@ Sogou 微信搜索接口，通过构造包含 SUV、SNUID 的 Cookie，可进行
 
 启动后需要手动输入一次验证码完成初始化触发
 
-触发后，计划任务每 2 秒请求保存一次 SNUID，每个 SNUID 目前至少可以使用 10 次
+触发后，计划任务每 200ms 请求保存一次 SNUID，每个 SNUID 目前至少可以使用 15 次
 
 ## 接口
 
@@ -48,7 +48,3 @@ Sogou 微信搜索接口，通过构造包含 SUV、SNUID 的 Cookie，可进行
 ## 测试
 
 resources/demo 包含了两个 PHP 的客户端测试工具
-
-resources/sql  数据库表结构
-
-## TODO
