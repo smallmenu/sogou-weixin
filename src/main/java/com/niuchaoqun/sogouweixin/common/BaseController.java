@@ -7,7 +7,6 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 
 public class BaseController {
-
     private static final Logger logger = LoggerFactory.getLogger(BaseController.class);
 
     @InitBinder

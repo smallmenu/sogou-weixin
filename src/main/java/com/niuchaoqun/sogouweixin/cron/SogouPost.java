@@ -3,21 +3,20 @@ package com.niuchaoqun.sogouweixin.cron;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.niuchaoqun.sogouweixin.config.SogouProperties;
 import com.niuchaoqun.sogouweixin.common.CookieJarImp;
-import com.niuchaoqun.sogouweixin.entity.Snuid;
 import com.niuchaoqun.sogouweixin.pojo.SogouMsg;
 import com.niuchaoqun.sogouweixin.common.Function;
-import com.niuchaoqun.sogouweixin.repository.SnuidRepository;
 import okhttp3.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.ListOperations;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -32,9 +31,9 @@ public class SogouPost {
     private SogouProperties sogou;
 
     @Autowired
-    private SnuidRepository snuidRepository;
+    private RedisTemplate<String, String> stringRedisTemplate;
 
-    @Scheduled(fixedDelay = 200)
+    @Scheduled(initialDelay=1000, fixedDelay = 200)
     public void generatorSnuid() throws IOException {
         memory();
 
@@ -77,11 +76,10 @@ public class SogouPost {
                 SogouMsg sogouMsg = mapper.readValue(json, SogouMsg.class);
 
                 if (sogouMsg.getCode() == 0) {
-                    String idString = sogouMsg.getId();
+                    String idString = (String) sogouMsg.getId();
                     if (idString.length() == 32) {
-                        Snuid snuid = new Snuid();
-                        snuid.setSnuid(idString);
-                        Snuid insert = snuidRepository.save(snuid);
+                        ListOperations<String, String> list = stringRedisTemplate.opsForList();
+                        list.rightPush(sogou.getRedisKey(), idString);
                     }
                 } else {
                     logger.info(sogouMsg.getMsg());

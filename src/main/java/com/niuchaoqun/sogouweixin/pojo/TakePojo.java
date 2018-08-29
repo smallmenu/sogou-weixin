@@ -1,6 +1,5 @@
 package com.niuchaoqun.sogouweixin.pojo;
 
-import com.niuchaoqun.sogouweixin.entity.Snuid;
 import lombok.Data;
 
 @Data
