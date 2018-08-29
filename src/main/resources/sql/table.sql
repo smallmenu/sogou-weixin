@@ -1,9 +1,0 @@
-CREATE TABLE `snuid` (
-	`id` INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-	`snuid` VARCHAR(32) NOT NULL,
-	`created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`),
-	INDEX `created` (`created`)
-)
-COLLATE='utf8mb4_general_ci'
-ENGINE=InnoDB;
