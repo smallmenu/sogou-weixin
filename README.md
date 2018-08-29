@@ -2,8 +2,8 @@
 
 Sogou 微信搜索接口，通过构造包含 SUV、SNUID 的 Cookie，可进行无限遍历
 
-* SpringBoot
-* Redis
+* SpringBoot 2.0.2
+* Redis 3.2
 
 ## 使用
 
